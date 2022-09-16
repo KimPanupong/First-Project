@@ -6,51 +6,41 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 //ตัวแปลของกราฟที่ดึงข้อมูลเข้ามาจาก firestore
-class Thaicharts {
-  final String month;
-  final String count;
-  final String color;
+class Demo {
+  final String week;
+  final String number;
 
-  Thaicharts({
-    this.count,
-    this.month,
-    this.color,
-  });
+  Demo({this.number, this.week});
 
-  Thaicharts.fromMap(Map<String, dynamic> map)
-      : assert(map['month'] != null),
-        assert(map['count'] != null),
-        assert(map['color'] != null),
-        count = map['month'],
-        month = map['count'],
-        color = map['color'];
+  Demo.fromMap(Map<String, dynamic> map)
+      : assert(map['week'] != null),
+        assert(map['number'] != null),
+        week = map['week'].toString(),
+        number = map['number'];
 
-  @override
-  String toString() => "Record<$month:$count:$color>";
+  //String toString() => "Record<$week:$number>";
 }
 
-class thaimonth extends StatefulWidget {
-  const thaimonth({Key key}) : super(key: key);
+class demolinecharts extends StatefulWidget {
+  const demolinecharts({Key key}) : super(key: key);
   @override
-  _thaimonthState createState() => _thaimonthState();
+  _demolinechartsState createState() => _demolinechartsState();
 }
 
-class _thaimonthState extends State<thaimonth> {
-  List<charts.Series> _seriesBarData;
-  List<Thaicharts> mydata;
+class _demolinechartsState extends State<demolinecharts> {
+  List<charts.Series<Demo, int>> _seriesBarData;
+  List<Demo> mydata;
   _generateData(mydata) {
     // ignore: deprecated_member_use
-    _seriesBarData = List<charts.Series<Thaicharts, String>>();
+    _seriesBarData = List<charts.Series<Demo, int>>();
     return [
       _seriesBarData.add(
-        charts.Series<Thaicharts, String>(
-            domainFn: (Thaicharts thai, _) => thai.count.toString(),
-            measureFn: (Thaicharts thai, _) => int.tryParse(thai.month),
-            colorFn: (thai, _) =>
-                charts.ColorUtil.fromDartColor(Color(int.parse(thai.color))),
-            id: 'Thai',
+        charts.Series<Demo, int>(
+            domainFn: (Demo linecharts, _) => int.parse(linecharts.week),
+            measureFn: (Demo linecharts, _) => int.parse(linecharts.number),
+            id: 'linecharts',
             data: mydata,
-            labelAccessorFn: (Thaicharts thai, _) => '${thai.month}'),
+            labelAccessorFn: (Demo linecharts, _) => '${linecharts.week}'),
       ),
     ];
   }
@@ -65,16 +55,15 @@ class _thaimonthState extends State<thaimonth> {
 
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('thai').snapshots(),
+      stream: FirebaseFirestore.instance.collection('linecharts').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
         } else {
-          List<Thaicharts> thai = snapshot.data.docs
-              .map((documentSnapshot) =>
-                  Thaicharts.fromMap(documentSnapshot.data()))
+          List<Demo> linecharts = snapshot.data.docs
+              .map((documentSnapshot) => Demo.fromMap(documentSnapshot.data()))
               .toList();
-          return _buildChart(context, thai);
+          return _buildChart(context, linecharts);
         }
       },
     );
@@ -108,7 +97,7 @@ class _thaimonthState extends State<thaimonth> {
     );
   }
 }*/
-  Widget _buildChart(BuildContext context, List<Thaicharts> saledata) {
+  Widget _buildChart(BuildContext context, List<Demo> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Container(
@@ -135,15 +124,26 @@ class _thaimonthState extends State<thaimonth> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: charts.BarChart(_seriesBarData,
+            child: charts.LineChart(_seriesBarData,
+                //barGroupingType: charts.BarGroupingType.stacked,
                 animate: true,
-                barGroupingType: charts.BarGroupingType.stacked,
-                vertical: true,
-                barRendererDecorator: charts.BarLabelDecorator<String>(),
+
+                //vertical: true,
+                //barRendererDecorator: charts.BarLabelDecorator<String>(),
                 behaviors: [
+                  new charts.ChartTitle('WEEK',
+                      titleStyleSpec: charts.TextStyleSpec(fontSize: 15),
+                      behaviorPosition: charts.BehaviorPosition.bottom,
+                      titleOutsideJustification:
+                          charts.OutsideJustification.middleDrawArea),
+                  new charts.ChartTitle('COUNT',
+                      titleStyleSpec: charts.TextStyleSpec(fontSize: 15),
+                      behaviorPosition: charts.BehaviorPosition.start,
+                      titleOutsideJustification:
+                          charts.OutsideJustification.middleDrawArea),
                   new charts.DatumLegend(
                       entryTextStyle: charts.TextStyleSpec(
-                          color: charts.MaterialPalette.black))
+                          fontSize: 12, color: charts.MaterialPalette.black))
                 ]),
           ),
         ),

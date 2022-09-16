@@ -282,7 +282,7 @@ class Lumpang extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 20, top: 155),
+        padding: EdgeInsets.only(left: 20, top: 165),
         child: RaisedButton(
           color: green,
           shape:

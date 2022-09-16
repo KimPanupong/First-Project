@@ -65,6 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Image.asset("assets/images/login1.png"),
                           Text("Email", style: TextStyle(fontSize: 20)),
                           TextFormField(
                             validator: MultiValidator([

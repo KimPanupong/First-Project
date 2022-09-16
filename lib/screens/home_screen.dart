@@ -1,3 +1,5 @@
+import 'package:covid19/province/Demoline.dart';
+import 'package:covid19/province/test.dart';
 import 'package:covid19/province/thailand/thaicharts.dart';
 import 'package:covid19/shared/constant.dart';
 import 'package:covid19/province/thailand/thaistatistic_widget.dart';
@@ -54,10 +56,7 @@ class MainHomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
-                  ),
-                  const SizedBox(
-                    height: 10,
+                    height: 24,
                   ),
                   const ThaiStatisticWidget(),
                   const SizedBox(
@@ -70,26 +69,19 @@ class MainHomeScreen extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  const thaimount(),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  thaimonth(),
+                  demolinecharts(),
                   const SizedBox(
                     height: 100,
                   ),
-                  /* Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),*/
                 ],
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

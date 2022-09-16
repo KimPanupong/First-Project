@@ -56,18 +56,39 @@ class InformasiScreen extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              const caseprovincesStatisticWidget(),
               const SizedBox(
                 height: 24,
               ),
               Text(
-                'วิเคราะห์ข้อมูล',
+                'วิเคราะห์ข้อมูลรายวัน',
                 style: medium.copyWith(
                   color: black,
                   fontSize: 20,
                 ),
               ),
-              const northmount(),
+              const northmonth(),
+              const SizedBox(
+                height: 24,
+              ),
+              Text(
+                'วิเคราะห์ข้อมูลรายสัปดาห์',
+                style: medium.copyWith(
+                  color: black,
+                  fontSize: 20,
+                ),
+              ),
+              const northmonth(),
+              const SizedBox(
+                height: 24,
+              ),
+              Text(
+                'วิเคราะห์ข้อมูลรายเดือน',
+                style: medium.copyWith(
+                  color: black,
+                  fontSize: 20,
+                ),
+              ),
+              const northmonth(),
               const SizedBox(
                 height: 100,
               ),

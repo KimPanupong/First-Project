@@ -32,102 +32,93 @@ class LocationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-      isExpanded: true,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(color: green),
-          borderRadius: BorderRadius.circular(100),
+        isExpanded: true,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(color: green),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: green),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: green),
+            borderRadius: BorderRadius.circular(100),
+          ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: green),
-          borderRadius: BorderRadius.circular(100),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: green),
-          borderRadius: BorderRadius.circular(100),
-        ),
-      ),
-      value: city,
-      items: cities
-          .map(
-            (e) => DropdownMenuItem(
-              child: Text(e),
-              value: e,
-            ),
-          )
-          .toList(),
-      onChanged: (String val) {
-        /*if (val == cities[0]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => StatisticWidget()),
-          );
-        }
-        ;*/
-        if (val == cities[1]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Chiangrai()),
-          );
-        }
-        ;
-        if (val == cities[2]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Chiangmai()),
-          );
-        }
-        ;
-        if (val == cities[3]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Nan()),
-          );
-        }
-        ;
-        if (val == cities[4]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Phayao()),
-          );
-        }
-        ;
-        if (val == cities[5]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Phrae()),
-          );
-        }
-        ;
-        if (val == cities[6]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Maehongson()),
-          );
-        }
-        ;
-        if (val == cities[7]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Lumpang()),
-          );
-        }
-        ;
-        if (val == cities[8]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Lumphun()),
-          );
-        }
-        ;
-        if (val == cities[9]) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Uttaradit()),
-          );
-        }
-        ;
-      },
-    );
+        value: city,
+        items: cities
+            .map(
+              (e) => DropdownMenuItem(
+                child: Text(e),
+                value: e,
+              ),
+            )
+            .toList(),
+        onChanged: (String val) {
+          if (val == cities[1]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Chiangrai()),
+            );
+          }
+          ;
+          if (val == cities[2]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Chiangmai()),
+            );
+          }
+          ;
+          if (val == cities[3]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Nan()),
+            );
+          }
+          ;
+          if (val == cities[4]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Phayao()),
+            );
+          }
+          ;
+          if (val == cities[5]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Phrae()),
+            );
+          }
+          ;
+          if (val == cities[6]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Maehongson()),
+            );
+          }
+          ;
+          if (val == cities[7]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Lumpang()),
+            );
+          }
+          ;
+          if (val == cities[8]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Lumphun()),
+            );
+          }
+          ;
+          if (val == cities[9]) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Uttaradit()),
+            );
+          }
+        });
   }
 }

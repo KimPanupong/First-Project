@@ -7,50 +7,49 @@ import 'package:charts_flutter/flutter.dart' as charts;
 
 //ตัวแปลของกราฟที่ดึงข้อมูลเข้ามาจาก firestore
 class Thaicharts {
-  final String month;
+  final String provinces;
   final String count;
   final String color;
 
   Thaicharts({
     this.count,
-    this.month,
+    this.provinces,
     this.color,
   });
 
   Thaicharts.fromMap(Map<String, dynamic> map)
-      : assert(map['month'] != null),
+      : assert(map['provinces'] != null),
         assert(map['count'] != null),
         assert(map['color'] != null),
-        count = map['month'],
-        month = map['count'],
+        count = map['provinces'],
+        provinces = map['count'],
         color = map['color'];
 
-  @override
-  String toString() => "Record<$month:$count:$color>";
+  String toString() => "Record<$provinces:$count:$color>";
 }
 
-class thaimonth extends StatefulWidget {
-  const thaimonth({Key key}) : super(key: key);
+class testmonth extends StatefulWidget {
+  const testmonth({Key key}) : super(key: key);
   @override
-  _thaimonthState createState() => _thaimonthState();
+  _testmonthState createState() => _testmonthState();
 }
 
-class _thaimonthState extends State<thaimonth> {
-  List<charts.Series> _seriesBarData;
+class _testmonthState extends State<testmonth> {
+  List<charts.Series<dynamic, String>> _seriesBarData;
   List<Thaicharts> mydata;
   _generateData(mydata) {
     // ignore: deprecated_member_use
-    _seriesBarData = List<charts.Series<Thaicharts, String>>();
+    _seriesBarData = List<charts.Series<dynamic, String>>();
     return [
       _seriesBarData.add(
         charts.Series<Thaicharts, String>(
-            domainFn: (Thaicharts thai, _) => thai.count.toString(),
-            measureFn: (Thaicharts thai, _) => int.tryParse(thai.month),
-            colorFn: (thai, _) =>
-                charts.ColorUtil.fromDartColor(Color(int.parse(thai.color))),
-            id: 'Thai',
+            domainFn: (Thaicharts test, _) => test.count.toString(),
+            measureFn: (Thaicharts test, _) => int.parse(test.provinces),
+            colorFn: (test, _) =>
+                charts.ColorUtil.fromDartColor(Color(int.parse(test.color))),
+            id: 'test',
             data: mydata,
-            labelAccessorFn: (Thaicharts thai, _) => '${thai.month}'),
+            labelAccessorFn: (Thaicharts test, _) => '${test.provinces}'),
       ),
     ];
   }
@@ -65,16 +64,16 @@ class _thaimonthState extends State<thaimonth> {
 
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('thai').snapshots(),
+      stream: FirebaseFirestore.instance.collection('test').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
         } else {
-          List<Thaicharts> thai = snapshot.data.docs
+          List<Thaicharts> test = snapshot.data.docs
               .map((documentSnapshot) =>
                   Thaicharts.fromMap(documentSnapshot.data()))
               .toList();
-          return _buildChart(context, thai);
+          return _buildChart(context, test);
         }
       },
     );
@@ -136,14 +135,14 @@ class _thaimonthState extends State<thaimonth> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: charts.BarChart(_seriesBarData,
-                animate: true,
                 barGroupingType: charts.BarGroupingType.stacked,
+                animate: true,
                 vertical: true,
                 barRendererDecorator: charts.BarLabelDecorator<String>(),
                 behaviors: [
                   new charts.DatumLegend(
                       entryTextStyle: charts.TextStyleSpec(
-                          color: charts.MaterialPalette.black))
+                          fontSize: 12, color: charts.MaterialPalette.black))
                 ]),
           ),
         ),

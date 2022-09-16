@@ -22,20 +22,20 @@ class Northcharts {
         assert(map['count'] != null),
         assert(map['color'] != null),
         count = map['month'],
-        month = map['count'].toString(),
+        month = map['count'],
         color = map['color'];
 
   @override
   String toString() => "Record<$month:$count:$color>";
 }
 
-class northmount extends StatefulWidget {
-  const northmount({Key key}) : super(key: key);
+class northmonth extends StatefulWidget {
+  const northmonth({Key key}) : super(key: key);
   @override
-  _northmountState createState() => _northmountState();
+  _northmonthState createState() => _northmonthState();
 }
 
-class _northmountState extends State<northmount> {
+class _northmonthState extends State<northmonth> {
   List<charts.Series<Northcharts, String>> _seriesBarData;
   List<Northcharts> mydata;
 
@@ -144,8 +144,7 @@ class _northmountState extends State<northmount> {
               _seriesBarData,
               animate: true,
               vertical: false,
-              barRendererDecorator: charts.BarLabelDecorator<
-                  String>(), /*behaviors: [new charts.DatumLegend()]*/
+              barRendererDecorator: charts.BarLabelDecorator<String>(),
             ),
           ),
         ),

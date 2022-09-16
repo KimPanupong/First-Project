@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:covid19/province/test.dart';
 import 'package:covid19/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -263,27 +264,16 @@ class Chiangrai extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              const testmonth(),
               const SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Image.asset('assets/images/peta.png'),
-              ),
-              const SizedBox(
-                height: 24,
+                height: 100,
               ),
             ]),
           ),
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(left: 20, top: 155),
+        padding: EdgeInsets.only(left: 20, top: 165),
         child: RaisedButton(
           color: green,
           shape:

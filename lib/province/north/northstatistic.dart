@@ -21,7 +21,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
             children: snapshot.data.docs.map((document) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: white,
                   borderRadius: BorderRadius.circular(20),

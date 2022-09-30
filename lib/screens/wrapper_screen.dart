@@ -18,7 +18,7 @@ class _WrapperScreenState extends State<WrapperScreen> {
   int selectedIndex = 0;
   final List<Widget> screens = [
     const MainHomeScreen(),
-    const InformasiScreen(),
+    const InformationScreen(),
     const NotificationScreen(),
     const SettingScreen(),
   ];

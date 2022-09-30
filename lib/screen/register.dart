@@ -53,14 +53,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               body: Container(
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Form(
                     key: formKey,
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset("assets/images/login1.png"),
+                          Image.asset("assets/images/register.png"),
                           Text("Email", style: TextStyle(fontSize: 20)),
                           TextFormField(
                             validator: MultiValidator([

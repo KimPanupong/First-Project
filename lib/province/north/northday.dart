@@ -6,55 +6,54 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 //ตัวแปลของกราฟที่ดึงข้อมูลเข้ามาจาก firestore
-class Northcharts {
-  final String month;
+class North_provinces {
+  final String provinces;
   final String count;
   final String color;
 
-  Northcharts({
+  North_provinces({
     this.count,
-    this.month,
+    this.provinces,
     this.color,
   });
 
-  Northcharts.fromMap(Map<String, dynamic> map)
-      : assert(map['month'] != null),
+  North_provinces.fromMap(Map<String, dynamic> map)
+      : assert(map['provinces'] != null),
         assert(map['count'] != null),
         assert(map['color'] != null),
-        count = map['month'],
-        month = map['count'],
+        count = map['provinces'],
+        provinces = map['count'],
         color = map['color'];
 
   @override
-  String toString() => "Record<$month:$count:$color>";
+  String toString() => "Record<$provinces:$count:$color>";
 }
 
-class northmonth extends StatefulWidget {
-  const northmonth({Key key}) : super(key: key);
+class northday extends StatefulWidget {
+  const northday({Key key}) : super(key: key);
   @override
-  _northmonthState createState() => _northmonthState();
+  _northdayState createState() => _northdayState();
 }
 
-class _northmonthState extends State<northmonth> {
-  List<charts.Series<Northcharts, String>> _seriesBarData;
-  List<Northcharts> mydata;
+class _northdayState extends State<northday> {
+  List<charts.Series<North_provinces, String>> _seriesBarData;
+  List<North_provinces> mydata;
 
   _generateData(mydata) {
     // ignore: deprecated_member_use
-    _seriesBarData = List<charts.Series<Northcharts, String>>();
+    _seriesBarData = List<charts.Series<North_provinces, String>>();
     return [
       _seriesBarData.add(
-        charts.Series<Northcharts, String>(
-          domainFn: (Northcharts northcharts, _) =>
-              northcharts.count.toString(),
-          measureFn: (Northcharts northcharts, _) =>
-              int.tryParse(northcharts.month),
-          colorFn: (northcharts, _) => charts.ColorUtil.fromDartColor(
-              Color(int.parse(northcharts.color))),
-          id: 'North',
+        charts.Series<North_provinces, String>(
+          domainFn: (North_provinces northday, _) => northday.count.toString(),
+          measureFn: (North_provinces northday, _) =>
+              int.tryParse(northday.provinces),
+          colorFn: (northday, _) =>
+              charts.ColorUtil.fromDartColor(Color(int.parse(northday.color))),
+          id: 'Northprovinces',
           data: mydata,
-          labelAccessorFn: (Northcharts northcharts, _) =>
-              '${northcharts.month}',
+          labelAccessorFn: (North_provinces northday, _) =>
+              '${northday.provinces}',
         ),
       )
     ];
@@ -70,23 +69,23 @@ class _northmonthState extends State<northmonth> {
 
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('northcharts').snapshots(),
+      stream: FirebaseFirestore.instance.collection('northday').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
         } else {
-          List<Northcharts> northcharts = snapshot.data.docs
+          List<North_provinces> northday = snapshot.data.docs
               .map((documentSnapshot) =>
-                  Northcharts.fromMap(documentSnapshot.data()))
+                  North_provinces.fromMap(documentSnapshot.data()))
               .toList();
-          return _buildChart(context, northcharts);
+          return _buildChart(context, northday);
         }
       },
     );
   }
 
   /// original
-  /*Widget _buildChart(BuildContext context, List<Northcharts> saledata) {
+  /*Widget _buildChart(BuildContext context, List<North_provinces> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Scaffold(
@@ -113,7 +112,7 @@ class _northmonthState extends State<northmonth> {
     );
   }
 }*/
-  Widget _buildChart(BuildContext context, List<Northcharts> saledata) {
+  Widget _buildChart(BuildContext context, List<North_provinces> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Container(

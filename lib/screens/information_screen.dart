@@ -1,19 +1,55 @@
-import 'package:covid19/province/north/caseprovinces.dart';
+import 'package:covid19/province/north/northmonth.dart';
 import 'package:covid19/province/north/northstatistic.dart';
+import 'package:covid19/province/north/northweek.dart';
 import 'package:covid19/shared/constant.dart';
 import 'package:covid19/province/widget/location_widget.dart';
-
 import 'package:flutter/material.dart';
+import '../province/north/northday.dart';
 
-import '../province/north/northcharts.dart';
+import 'package:animate_do/animate_do.dart';
 
-class InformasiScreen extends StatelessWidget {
-  const InformasiScreen({
-    Key key,
-  }) : super(key: key);
+class InformationScreen extends StatefulWidget {
+  const InformationScreen({Key key}) : super(key: key);
 
   @override
+  State<InformationScreen> createState() => _InformationScreenState();
+}
+
+class _InformationScreenState extends State<InformationScreen> {
+  int Page = 0;
+  @override
   Widget build(BuildContext context) {
+    var children = [
+      const SizedBox(
+        height: 24,
+      ),
+      LocationWidget(),
+      const SizedBox(
+        height: 24,
+      ),
+      const NorthStatisticWidget(),
+      const SizedBox(
+        height: 18,
+      ),
+      Text(
+        'วิเคราะห์ข้อมูล',
+        style: medium.copyWith(
+          color: black,
+          fontSize: 20,
+        ),
+      ),
+      const SizedBox(
+        height: 18,
+      ),
+      getTabs(),
+      const SizedBox(
+        height: 24,
+      ),
+      IndexedStack(
+        index: Page,
+        children: [getday(), getweek(), getmonth()],
+      ),
+    ];
     return Stack(children: [
       Image.asset(
         'assets/images/informasi.png',
@@ -33,7 +69,7 @@ class InformasiScreen extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.72,
+          height: MediaQuery.of(context).size.height * 0.62,
           padding: const EdgeInsets.symmetric(horizontal: 24),
           decoration: const BoxDecoration(
             color: bg,
@@ -43,70 +79,229 @@ class InformasiScreen extends StatelessWidget {
             ),
           ),
           child: SingleChildScrollView(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(
-                height: 24,
-              ),
-              LocationWidget(),
-              const SizedBox(
-                height: 24,
-              ),
-              const NorthStatisticWidget(),
-              const SizedBox(
-                height: 24,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                'วิเคราะห์ข้อมูลรายวัน',
-                style: medium.copyWith(
-                  color: black,
-                  fontSize: 20,
-                ),
-              ),
-              const northmonth(),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                'วิเคราะห์ข้อมูลรายสัปดาห์',
-                style: medium.copyWith(
-                  color: black,
-                  fontSize: 20,
-                ),
-              ),
-              const northmonth(),
-              const SizedBox(
-                height: 24,
-              ),
-              Text(
-                'วิเคราะห์ข้อมูลรายเดือน',
-                style: medium.copyWith(
-                  color: black,
-                  fontSize: 20,
-                ),
-              ),
-              const northmonth(),
-              const SizedBox(
-                height: 100,
-              ),
-              /*Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
-              const SizedBox(
-                height: 24,
-              ),*/
-            ]),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: children),
           ),
         ),
       ),
     ]);
+  }
+
+  Widget getTabs() {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: 55,
+      decoration:
+          BoxDecoration(color: white, borderRadius: BorderRadius.circular(12)),
+      child: Row(
+        children: [
+          Page == 0
+              ? Flexible(
+                  child: ElasticIn(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Page = 0;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Container(
+                        width: (size.width - 45) / 3,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: green,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: Text(
+                            "รายวัน",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+              : GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Page = 0;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Container(
+                      width: (size.width - 45) / 3,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          // color: primary,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: Text(
+                          "รายวัน",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: black.withOpacity(0.5),
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+          Page == 1
+              ? Flexible(
+                  child: ElasticIn(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Page = 1;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Container(
+                        width: (size.width - 45) / 4,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: orange,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: Text(
+                            "รายสัปดาห์",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+              : GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Page = 1;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Container(
+                      width: (size.width - 45) / 4,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          // color: primary,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: Text(
+                          "รายสัปดาห์",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: black.withOpacity(0.5),
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+          Page == 2
+              ? Flexible(
+                  child: ElasticIn(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Page = 2;
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Container(
+                        width: (size.width - 45) / 3,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: red,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Center(
+                          child: Text(
+                            "รายเดือน",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: white,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ))
+              : GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Page = 2;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Container(
+                      width: (size.width - 45) / 3,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          // color: primary,
+                          borderRadius: BorderRadius.circular(12)),
+                      child: Center(
+                        child: Text(
+                          "รายเดือน",
+                          style: TextStyle(
+                              fontSize: 15,
+                              color: black.withOpacity(0.5),
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget getday() {
+    return Wrap(runSpacing: 20, spacing: 20, children: [
+      const northday(),
+      const SizedBox(
+        height: 60,
+      )
+    ]);
+  }
+
+  Widget getweek() {
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: [
+        const northweek(),
+        const SizedBox(
+          height: 60,
+        )
+      ],
+    );
+  }
+
+  Widget getmonth() {
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: [
+        const northmonth(),
+        const SizedBox(
+          height: 60,
+        )
+      ],
+    );
   }
 }

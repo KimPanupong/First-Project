@@ -6,51 +6,54 @@ import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 //ตัวแปลของกราฟที่ดึงข้อมูลเข้ามาจาก firestore
-class Thaicharts {
-  final String provinces;
+class North_week {
+  final String week;
   final String count;
   final String color;
 
-  Thaicharts({
+  North_week({
     this.count,
-    this.provinces,
+    this.week,
     this.color,
   });
 
-  Thaicharts.fromMap(Map<String, dynamic> map)
-      : assert(map['provinces'] != null),
+  North_week.fromMap(Map<String, dynamic> map)
+      : assert(map['week'] != null),
         assert(map['count'] != null),
         assert(map['color'] != null),
-        count = map['provinces'],
-        provinces = map['count'],
+        count = map['week'],
+        week = map['count'],
         color = map['color'];
 
-  String toString() => "Record<$provinces:$count:$color>";
-}
-
-class testmonth extends StatefulWidget {
-  const testmonth({Key key}) : super(key: key);
   @override
-  _testmonthState createState() => _testmonthState();
+  String toString() => "Record<$week:$count:$color>";
 }
 
-class _testmonthState extends State<testmonth> {
-  List<charts.Series<dynamic, String>> _seriesBarData;
-  List<Thaicharts> mydata;
+class northweek extends StatefulWidget {
+  const northweek({Key key}) : super(key: key);
+  @override
+  _northweekState createState() => _northweekState();
+}
+
+class _northweekState extends State<northweek> {
+  List<charts.Series<North_week, String>> _seriesBarData;
+  List<North_week> mydata;
+
   _generateData(mydata) {
     // ignore: deprecated_member_use
-    _seriesBarData = List<charts.Series<dynamic, String>>();
+    _seriesBarData = List<charts.Series<North_week, String>>();
     return [
       _seriesBarData.add(
-        charts.Series<Thaicharts, String>(
-            domainFn: (Thaicharts test, _) => test.count.toString(),
-            measureFn: (Thaicharts test, _) => int.parse(test.provinces),
-            colorFn: (test, _) =>
-                charts.ColorUtil.fromDartColor(Color(int.parse(test.color))),
-            id: 'test',
-            data: mydata,
-            labelAccessorFn: (Thaicharts test, _) => '${test.provinces}'),
-      ),
+        charts.Series<North_week, String>(
+          domainFn: (North_week northweek, _) => northweek.count.toString(),
+          measureFn: (North_week northweek, _) => int.tryParse(northweek.week),
+          colorFn: (northweek, _) =>
+              charts.ColorUtil.fromDartColor(Color(int.parse(northweek.color))),
+          id: 'Northweek',
+          data: mydata,
+          labelAccessorFn: (North_week northweek, _) => '${northweek.week}',
+        ),
+      )
     ];
   }
 
@@ -64,23 +67,23 @@ class _testmonthState extends State<testmonth> {
 
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('test').snapshots(),
+      stream: FirebaseFirestore.instance.collection('northweek').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
         } else {
-          List<Thaicharts> test = snapshot.data.docs
+          List<North_week> northweek = snapshot.data.docs
               .map((documentSnapshot) =>
-                  Thaicharts.fromMap(documentSnapshot.data()))
+                  North_week.fromMap(documentSnapshot.data()))
               .toList();
-          return _buildChart(context, test);
+          return _buildChart(context, northweek);
         }
       },
     );
   }
 
   /// original
-  /*Widget _buildChart(BuildContext context, List<Northcharts> saledata) {
+  /*Widget _buildChart(BuildContext context, List<North_week> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Scaffold(
@@ -107,7 +110,7 @@ class _testmonthState extends State<testmonth> {
     );
   }
 }*/
-  Widget _buildChart(BuildContext context, List<Thaicharts> saledata) {
+  Widget _buildChart(BuildContext context, List<North_week> saledata) {
     mydata = saledata;
     _generateData(mydata);
     return Container(
@@ -129,21 +132,17 @@ class _testmonthState extends State<testmonth> {
           padding: EdgeInsets.all(0),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height / 2,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: charts.BarChart(_seriesBarData,
-                barGroupingType: charts.BarGroupingType.stacked,
-                animate: true,
-                vertical: true,
-                barRendererDecorator: charts.BarLabelDecorator<String>(),
-                behaviors: [
-                  new charts.DatumLegend(
-                      entryTextStyle: charts.TextStyleSpec(
-                          fontSize: 12, color: charts.MaterialPalette.black))
-                ]),
+            child: charts.BarChart(
+              _seriesBarData,
+              animate: true,
+              vertical: true,
+              barRendererDecorator: charts.BarLabelDecorator<String>(),
+            ),
           ),
         ),
       ),

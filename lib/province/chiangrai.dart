@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:covid19/province/test.dart';
 import 'package:covid19/shared/constant.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -264,7 +263,6 @@ class Chiangrai extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
-              const testmonth(),
               const SizedBox(
                 height: 100,
               ),

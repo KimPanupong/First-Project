@@ -35,6 +35,13 @@ dependencies:
   cloud_firestore: ^3.4.6
   http: ^0.13.5
   charts_flutter: ^0.12.0
+  #NEW
+  
+  
+  circle_progress_bar: ^0.1.2
+  blurrycontainer: ^1.0.2
+  animate_do: ^1.7.5
+  flutter_svg: ^0.20.0-nullsafety.3
 
 
 dev_dependencies:

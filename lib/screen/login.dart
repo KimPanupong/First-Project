@@ -58,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               body: Container(
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Form(
                     key: formKey,
                     child: SingleChildScrollView(
@@ -78,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               profile.email = email;
                             },
                           ),
-                          SizedBox(
-                            height: 15,
-                          ),
+                          /*SizedBox(
+                            height: 1,
+                          ),*/
                           Text("Password", style: TextStyle(fontSize: 20)),
                           TextFormField(
                             validator: RequiredValidator(
@@ -128,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              child: Text("Sign IN",
+                              child: Text("LOGIN IN",
                                   style: TextStyle(fontSize: 20)),
                               onPressed: () async {
                                 if (formKey.currentState.validate()) {

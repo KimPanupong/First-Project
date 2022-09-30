@@ -34,7 +34,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                   ],
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +56,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                           ),
                         ),
                         Text(
-                          document["newcase"] + 'today',
+                          '+' + document["newcase"] + '(วันนี้)',
                           style: regular.copyWith(
                             color: orange,
                             fontSize: 15,
@@ -79,7 +79,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                       ],
                     ),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
@@ -87,17 +87,17 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                           height: 40,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: green.withOpacity(0.1),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Image.asset(
+                              // color: green.withOpacity(0.1),
+                              //shape: BoxShape.circle,
+                              ),
+                          /*child: Image.asset(
                             'assets/images/sembuh.png',
                             width: 20,
                             height: 20,
                             fit: BoxFit.cover,
-                          ),
+                          ),*/
                         ),
-                        Text(
+                        /*Text(
                           document["recovery"],
                           style: regular.copyWith(
                             color: green,
@@ -110,16 +110,16 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                             color: red,
                             fontSize: 15,
                           ),
-                        ),
+                        ),*/
                         Text(
-                          'กำลังรักษา\n',
+                          '\n\n\n',
                           style: regular.copyWith(
                             color: green,
                             fontSize: 14,
                           ),
                         ),
                         Text(
-                          'ข้อมูลวันที่ asdasdasd',
+                          document["datetime"],
                           style: regular.copyWith(
                             color: black,
                             fontSize: 12,
@@ -147,7 +147,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                           ),
                         ),
                         Text(
-                          document["newdeath"],
+                          '+' + document["newdeath"] + '(วันนี้)',
                           style: regular.copyWith(
                             color: red,
                             fontSize: 15,

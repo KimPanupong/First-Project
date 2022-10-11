@@ -1,15 +1,19 @@
-import 'package:covid19/province/chiangmai.dart';
-import 'package:covid19/province/chiangrai.dart';
-import 'package:covid19/province/lumpang.dart';
-import 'package:covid19/province/lumphun.dart';
-import 'package:covid19/province/maehongson.dart';
-import 'package:covid19/province/nan.dart';
-import 'package:covid19/province/phayao.dart';
-import 'package:covid19/province/phrae.dart';
-import 'package:covid19/province/uttaradit.dart';
+import 'package:covid19/province/chiangmai/chiangmai.dart';
+
+import 'package:covid19/province/chiangrai/chiangrai.dart';
+
+import 'package:covid19/province/lumphun/lumphun.dart';
+import 'package:covid19/province/maehongson/maehongson.dart';
+import 'package:covid19/province/nan/nan.dart';
+
+import 'package:covid19/province/phayao/phayao.dart';
+import 'package:covid19/province/phrae/phrae.dart';
+import 'package:covid19/province/uttaradit/uttaradit.dart';
 import 'package:covid19/shared/constant.dart';
 
 import 'package:flutter/material.dart';
+
+import '../lumpang/lumpang.dart';
 
 class LocationWidget extends StatelessWidget {
   LocationWidget({

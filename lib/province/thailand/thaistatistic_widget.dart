@@ -13,17 +13,17 @@ class ThaiStatisticWidget extends StatefulWidget {
 class _ThaiStatisticWidgetState extends State<ThaiStatisticWidget> {
   // ignore: unused_field
   List<dynamic> _data = [];
-  var _newCase = 0;
-  var _totalCase = 0;
-  var _newDeath = 0;
-  var _totalDeath = 0;
-  var _newRecovered = 0;
-  var _totalRecovered = 0;
+  var _newCase;
+  var _totalCase;
+  var _newDeath;
+  var _totalDeath;
+  var _newRecovered;
+  var _totalRecovered;
   String _DateTupdateDate;
   // ignore: missing_return
   Future<String> getData() async {
-    var url = Uri.https('covid19.ddc.moph.go.th', '/api/Cases/today-cases-all',
-        {'q': '{http}'});
+    var url = Uri.https('covid19.ddc.moph.go.th',
+        'api/Cases/timeline-cases-all', {'q': '{http}'});
     var response = await http.get(url);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);

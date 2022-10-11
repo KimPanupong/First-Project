@@ -1,6 +1,6 @@
-import 'package:covid19/province/thailand/thaicharts.dart';
 import 'package:covid19/shared/constant.dart';
-import 'package:covid19/province/thailand/thaistatistic_widget.dart';
+
+import 'package:covid19/widgets/Staticwidget.dart';
 import 'package:flutter/material.dart';
 
 class MainHomeScreen extends StatelessWidget {
@@ -56,7 +56,10 @@ class MainHomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  const ThaiStatisticWidget(),
+                  ABC(
+                    title: "test",
+                  ),
+                  //const ThaiStatisticWidget(),
                   const SizedBox(
                     height: 24,
                   ),
@@ -70,7 +73,7 @@ class MainHomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  thaimonth(),
+
                   const SizedBox(
                     height: 100,
                   ),

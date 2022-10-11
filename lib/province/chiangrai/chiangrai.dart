@@ -1,89 +1,98 @@
-import 'package:covid19/widgets/Staticwidget.dart';
-import 'package:covid19/shared/constant.dart';
-import 'package:covid19/province/widget/location_widget.dart';
-import 'package:flutter/material.dart';
+// ignore_for_file: deprecated_member_use
 
 import 'package:animate_do/animate_do.dart';
+import 'package:covid19/shared/constant.dart';
+import 'package:covid19/widgets/Staticwidget.dart';
+import 'package:covid19/widgets/chartswidget_day.dart';
+import 'package:covid19/widgets/chartswidget_month.dart';
+import 'package:covid19/widgets/chartswidget_week.dart';
+import 'package:flutter/material.dart';
 
-class InformationScreen extends StatefulWidget {
-  const InformationScreen({Key key}) : super(key: key);
+//////////////////////////////////////////////////////////////////////
+class Chiangrai extends StatefulWidget {
+  const Chiangrai({Key key}) : super(key: key);
 
   @override
-  State<InformationScreen> createState() => _InformationScreenState();
+  State<Chiangrai> createState() => _ChiangraiState();
 }
 
-class _InformationScreenState extends State<InformationScreen> {
+class _ChiangraiState extends State<Chiangrai> {
   int Page = 0;
   @override
   Widget build(BuildContext context) {
-    var children = [
-      const SizedBox(
-        height: 24,
-      ),
-      LocationWidget(),
-      const SizedBox(
-        height: 24,
-      ),
-      ABC(title: "north"),
-      //const NorthStatisticWidget(),
-      const SizedBox(
-        height: 18,
-      ),
-      Text(
-        'วิเคราะห์ข้อมูล',
-        style: medium.copyWith(
-          color: black,
-          fontSize: 20,
-        ),
-      ),
-      const SizedBox(
-        height: 18,
-      ),
-      getTabs(),
-      const SizedBox(
-        height: 24,
-      ),
-      IndexedStack(
-        index: Page,
-        children: [getday(), getweek(), getmonth()],
-      ),
-    ];
-    return Stack(children: [
-      Image.asset(
-        'assets/images/informasi.png',
-        width: MediaQuery.of(context).size.width,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 30, top: 100),
-        child: Text(
-          'ข้อมูลสถิติ\nCOVID-19',
-          style: bold.copyWith(
-            color: white,
-            fontSize: 36,
-          ),
-        ),
-      ),
-      Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
+    return Scaffold(
+      body: Stack(children: [
+        Image.asset(
+          'assets/images/informasi.png',
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.62,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          decoration: const BoxDecoration(
-            color: bg,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 28, top: 90),
+          child: Text(
+            'จังหวัดเชียงราย',
+            style: bold.copyWith(
+              color: white,
+              fontSize: 36,
             ),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: children),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.79,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            decoration: const BoxDecoration(
+              color: bg,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 0, top: 5),
+                      child: RaisedButton(
+                        color: green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('Back', style: regular),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    ABC(title: 'S_chiangrai'),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                      'วิเคราะห์ข้อมูล',
+                      style: medium.copyWith(
+                        color: black,
+                        fontSize: 38,
+                      ),
+                    ),
+                    getTabs(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    IndexedStack(
+                      index: Page,
+                      children: [getday(), getweek(), getmonth()],
+                    ),
+                  ]),
+            ),
           ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 
   Widget getTabs() {
@@ -270,6 +279,7 @@ class _InformationScreenState extends State<InformationScreen> {
 
   Widget getday() {
     return Wrap(runSpacing: 20, spacing: 20, children: [
+      Charts_day(title: 'chiangrai'),
       const SizedBox(
         height: 60,
       )
@@ -281,6 +291,7 @@ class _InformationScreenState extends State<InformationScreen> {
       runSpacing: 20,
       spacing: 20,
       children: [
+        Charts_week(title: 'chiangrai'),
         const SizedBox(
           height: 60,
         )
@@ -293,6 +304,7 @@ class _InformationScreenState extends State<InformationScreen> {
       runSpacing: 20,
       spacing: 20,
       children: [
+        Charts_month(title: 'chiangrai'),
         const SizedBox(
           height: 60,
         )

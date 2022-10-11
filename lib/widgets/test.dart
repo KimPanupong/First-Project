@@ -2,17 +2,19 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:covid19/shared/constant.dart';
 import 'package:flutter/material.dart';
 
-class NorthStatisticWidget extends StatefulWidget {
-  const NorthStatisticWidget({Key key}) : super(key: key);
-  @override
-  _NorthStatisticWidget createState() => _NorthStatisticWidget();
-}
+class ZZZ extends StatelessWidget {
+  final String title;
+  final Widget custom;
+  const ZZZ({
+    Key key,
+    this.title,
+    this.custom,
+  }) : super(key: key);
 
-class _NorthStatisticWidget extends State<NorthStatisticWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseFirestore.instance.collection("north").snapshots(),
+      stream: FirebaseFirestore.instance.collection(title).snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
           return const Text('Something went wrong');
@@ -34,7 +36,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                   ],
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +81,7 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                       ],
                     ),
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
@@ -87,34 +89,34 @@ class _NorthStatisticWidget extends State<NorthStatisticWidget> {
                           height: 40,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                              // color: green.withOpacity(0.1),
-                              //shape: BoxShape.circle,
-                              ),
-                          /*child: Image.asset(
+                            color: green.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
                             'assets/images/sembuh.png',
                             width: 20,
                             height: 20,
                             fit: BoxFit.cover,
-                          ),*/
+                          ),
                         ),
-                        /*Text(
-                          document["recovery"],
+                        Text(
+                          '+' + document["recovery"] + '(วันนี้)',
                           style: regular.copyWith(
-                            color: green,
+                            color: orange,
                             fontSize: 15,
                           ),
                         ),
                         Text(
                           document["totalrecovery"],
                           style: regular.copyWith(
-                            color: red,
+                            color: orange,
                             fontSize: 15,
                           ),
-                        ),*/
+                        ),
                         Text(
-                          '\n\n\n',
+                          'กำลังรักษา\n',
                           style: regular.copyWith(
-                            color: green,
+                            color: orange,
                             fontSize: 14,
                           ),
                         ),

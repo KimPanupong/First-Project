@@ -1,4 +1,6 @@
-import 'package:covid19/screen/login.dart';
+// ignore_for_file: deprecated_member_use
+
+import 'package:covid19/loginscreens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
-              floatingActionButton: FloatingActionButton(
+              /*  floatingActionButton: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)),
                 backgroundColor: Colors.green,
                 onPressed: () {
                   Navigator.pushReplacement(
@@ -46,11 +50,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   );
                 },
                 child: Text("Back"),
-              ),
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text("Create an account"),
-              ),
+              ),*/
+
               body: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
@@ -87,9 +88,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           SizedBox(
                             width: double.infinity,
-                            child: ElevatedButton(
-                              child: Text("Register",
-                                  style: TextStyle(fontSize: 20)),
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              color: Colors.green,
+                              child: Text("สร้างบัญชี",
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
                               onPressed: () async {
                                 if (formKey.currentState.validate()) {
                                   formKey.currentState.save();

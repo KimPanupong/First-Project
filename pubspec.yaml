@@ -36,13 +36,16 @@ dependencies:
   http: ^0.13.5
   charts_flutter: ^0.12.0
   #NEW
-  
-  
+ 
+  location: ^4.3.0
+  geocoding: ^2.0.1
+  firebase_database: ^9.1.7
   circle_progress_bar: ^0.1.2
   blurrycontainer: ^1.0.2
   animate_do: ^1.7.5
   flutter_svg: ^0.20.0-nullsafety.3
-
+  
+  syncfusion_flutter_charts: ^20.3.50
 
 dev_dependencies:
   flutter_test:

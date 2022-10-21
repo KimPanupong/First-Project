@@ -3,14 +3,26 @@ import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-class ThaiStatisticWidget extends StatefulWidget {
-  const ThaiStatisticWidget({Key key}) : super(key: key);
+class ApiWIdget extends StatefulWidget {
+  const ApiWIdget({
+    Key key,
+    this.number,
+    this.link1,
+    this.link2,
+    this.child,
+  });
+  final int number;
+  final Widget child;
+  final String link1;
+  final String link2;
 
   @override
-  State<ThaiStatisticWidget> createState() => _ThaiStatisticWidgetState();
+  State<ApiWIdget> createState() => _ApiWIdgetState();
 }
 
-class _ThaiStatisticWidgetState extends State<ThaiStatisticWidget> {
+class _ApiWIdgetState extends State<ApiWIdget> {
+  // ignore: unused_field
+
   // ignore: unused_field
   List<dynamic> _data = [];
   var _newCase;
@@ -22,20 +34,19 @@ class _ThaiStatisticWidgetState extends State<ThaiStatisticWidget> {
   String _DateTupdateDate;
   // ignore: missing_return
   Future<String> getData() async {
-    var url = Uri.https('covid19.ddc.moph.go.th',
-        'api/Cases/timeline-cases-all', {'q': '{http}'});
+    var url = Uri.https(widget.link1, widget.link2, {'q': '{https}'});
     var response = await http.get(url);
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
       print(jsonResponse);
       this.setState(() {
-        _newCase = jsonResponse[0]['new_case'];
-        _totalCase = jsonResponse[0]['total_case'];
-        _newDeath = jsonResponse[0]['new_death'];
-        _totalDeath = jsonResponse[0]['total_death'];
-        _newRecovered = jsonResponse[0]['new_recovered'];
-        _totalRecovered = jsonResponse[0]['total_recovered'];
-        _DateTupdateDate = jsonResponse[0]['update_date'];
+        _newCase = jsonResponse[widget.number]['new_case'];
+        _totalCase = jsonResponse[widget.number]['total_case'];
+        _newDeath = jsonResponse[widget.number]['new_death'];
+        _totalDeath = jsonResponse[widget.number]['total_death'];
+        _newRecovered = jsonResponse[widget.number]['new_recovered'];
+        _totalRecovered = jsonResponse[widget.number]['total_recovered'];
+        _DateTupdateDate = jsonResponse[widget.number]['update_date'];
       });
     }
   }

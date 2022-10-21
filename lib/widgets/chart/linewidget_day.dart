@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:covid19/shared/constant.dart';
-
 import 'package:flutter/material.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 //ตัวแปลของกราฟที่ดึงข้อมูลเข้ามาจาก firestore
 class chart {
@@ -30,40 +28,33 @@ class chart {
 }
 
 // ignore: must_be_immutable
-class Charts_day extends StatelessWidget {
-  final String title;
-
-  final Widget custom;
-  Charts_day({
+class Widget_day extends StatefulWidget {
+  const Widget_day({
     Key key,
     this.title,
-    this.custom,
-  }) : super(key: key);
-  List<charts.Series<chart, String>> _seriesBarData;
+    this.title1,
+    this.child,
+  });
+  final String title;
+  final Widget child;
+  final String title1;
+
+  @override
+  State<Widget_day> createState() => _Widget_dayState();
+}
+
+class _Widget_dayState extends State<Widget_day> {
   List<chart> mydata;
 
   _generateData(mydata) {
     // ignore: deprecated_member_use
-    _seriesBarData = List<charts.Series<chart, String>>();
-    return [
-      _seriesBarData.add(
-        charts.Series<chart, String>(
-          domainFn: (chart title, _) => title.count.toString(),
-          measureFn: (chart title, _) => int.tryParse(title.sub),
-          colorFn: (title, _) =>
-              charts.ColorUtil.fromDartColor(Color(int.parse(title.color))),
-          id: 'Northsub',
-          data: mydata,
-          labelAccessorFn: (chart Charts_day, _) => '${Charts_day.sub}',
-        ),
-      )
-    ];
+    return [];
   }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection(title).snapshots(),
+      stream: FirebaseFirestore.instance.collection(widget.title).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return LinearProgressIndicator();
@@ -95,23 +86,37 @@ class Charts_day extends StatelessWidget {
         ],
       ),
       child: Center(
-        child: Padding(
-          padding: EdgeInsets.all(0),
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 2,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: charts.BarChart(
-              _seriesBarData,
-              animate: true,
-              vertical: false,
-              barRendererDecorator: charts.BarLabelDecorator<String>(),
-            ),
-          ),
-        ),
+        child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Container(
+                width: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height / 2,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: SfCartesianChart(
+                    primaryXAxis: CategoryAxis(),
+                    legend: Legend(isVisible: true),
+                    tooltipBehavior: TooltipBehavior(enable: true),
+                    series: <ChartSeries<chart, String>>[
+                      LineSeries<chart, String>(
+                        dataSource: mydata,
+                        xValueMapper: (chart title, _) => title.count,
+                        yValueMapper: (chart title, _) =>
+                            int.tryParse(title.sub),
+                        name: widget.title1,
+                        color: green,
+                        // Enable data label
+                        dataLabelSettings: DataLabelSettings(
+                          isVisible: true,
+                        ),
+                      )
+                    ]),
+              ),
+            )),
       ),
     );
   }

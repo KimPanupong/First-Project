@@ -1,6 +1,6 @@
 import 'package:covid19/shared/constant.dart';
-
-import 'package:covid19/widgets/Staticwidget.dart';
+import 'package:covid19/widgets/Api_StatisticWidget.dart';
+import 'package:covid19/widgets/chart/linewidget_day.dart';
 import 'package:flutter/material.dart';
 
 class MainHomeScreen extends StatelessWidget {
@@ -56,10 +56,14 @@ class MainHomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-                  ABC(
-                    title: "test",
+                  /*Statistic_Input_Widget(
+                    title: "test",*
+                  ),*/
+                  const ApiWIdget(
+                    link1: 'covid19.ddc.moph.go.th',
+                    link2: '/api/Cases/today-cases-all',
+                    number: 0,
                   ),
-                  //const ThaiStatisticWidget(),
                   const SizedBox(
                     height: 24,
                   ),
@@ -73,9 +77,12 @@ class MainHomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 24,
                   ),
-
+                  Widget_day(
+                    title: '3month',
+                    title1: '3 เดือนล่าสุด',
+                  ),
                   const SizedBox(
-                    height: 100,
+                    height: 80,
                   ),
                 ],
               ),

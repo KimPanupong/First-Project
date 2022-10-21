@@ -1,7 +1,10 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:covid19/screen/register.dart';
+import 'package:covid19/address/splashscreen.dart';
+import 'package:covid19/loginscreens/forgotpassword_page.dart';
+import 'package:covid19/loginscreens/register.dart';
 import 'package:covid19/screens/wrapper_screen.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -50,12 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Text("Back"),
               ),*/
-              appBar: AppBar(
-                centerTitle: true,
-                title: Text(
-                  "Login ",
-                ),
-              ),
+
               body: Container(
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
@@ -98,10 +96,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 150.0,
                                 //height: ,
                                 child: RaisedButton(
-                                  onPressed: () => {},
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgetPasswordPage()));
+                                  },
                                   color: Colors.red,
                                   child: Text(
-                                    'Forgetpassword',
+                                    'Forgotpassword',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -110,11 +116,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 150.0,
                                 //height: ,
                                 child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
                                   onPressed: () {
-                                    Navigator.pushReplacement(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return RegisterScreen();
-                                    }));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                RegisterScreen()));
                                   },
                                   color: Colors.orange,
                                   child: Text(
@@ -125,11 +134,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           )),
-                          SizedBox(
+                          Container(
                             width: double.infinity,
-                            child: ElevatedButton(
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                              color: Colors.green,
                               child: Text("LOGIN IN",
-                                  style: TextStyle(fontSize: 20)),
+                                  style: TextStyle(
+                                      fontSize: 20, color: Colors.white)),
                               onPressed: () async {
                                 if (formKey.currentState.validate()) {
                                   formKey.currentState.save();
@@ -153,6 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 }
                               },
                             ),
+                          ),
+                          SizedBox(
+                            height: 30,
                           ),
                         ],
                       ),

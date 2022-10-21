@@ -1,9 +1,12 @@
-import 'package:covid19/widgets/Staticwidget.dart';
+import 'package:covid19/widgets/Statistic_Input_Widget.dart';
 import 'package:covid19/shared/constant.dart';
-import 'package:covid19/province/widget/location_widget.dart';
+import 'package:covid19/widgets/location_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:animate_do/animate_do.dart';
+
+import '../widgets/chart/linewidget_day.dart';
+import '../widgets/chart/linewidget_month.dart';
+import '../widgets/chart/linewidget_week.dart';
 
 class InformationScreen extends StatefulWidget {
   const InformationScreen({Key key}) : super(key: key);
@@ -24,7 +27,7 @@ class _InformationScreenState extends State<InformationScreen> {
       const SizedBox(
         height: 24,
       ),
-      ABC(title: "north"),
+      Statistic_Input_Widget(title: "north"),
       //const NorthStatisticWidget(),
       const SizedBox(
         height: 18,
@@ -270,6 +273,10 @@ class _InformationScreenState extends State<InformationScreen> {
 
   Widget getday() {
     return Wrap(runSpacing: 20, spacing: 20, children: [
+      Widget_day(
+        title: 'provinces',
+        title1: 'จังหวัด',
+      ),
       const SizedBox(
         height: 60,
       )
@@ -281,6 +288,10 @@ class _InformationScreenState extends State<InformationScreen> {
       runSpacing: 20,
       spacing: 20,
       children: [
+        Widget_week(
+          title: 'provinces',
+          title1: 'จังหวัด',
+        ),
         const SizedBox(
           height: 60,
         )
@@ -293,6 +304,10 @@ class _InformationScreenState extends State<InformationScreen> {
       runSpacing: 20,
       spacing: 20,
       children: [
+        Widget_month(
+          title: 'provinces',
+          title1: 'จังหวัด',
+        ),
         const SizedBox(
           height: 60,
         )

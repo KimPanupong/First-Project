@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-
 class WelcomeScreen extends StatelessWidget {
   final auth = FirebaseAuth.instance;
 
@@ -28,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
                   auth.signOut().then((value) {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
-                      return HomeScreen();
+                      return;
                     }));
                   });
                 },
@@ -39,5 +37,4 @@ class WelcomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-*/
+}*/

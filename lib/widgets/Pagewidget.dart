@@ -1,24 +1,38 @@
 // ignore_for_file: deprecated_member_use
-
 import 'package:animate_do/animate_do.dart';
 import 'package:covid19/shared/constant.dart';
+import 'package:covid19/widgets/Api_StatisticWidget.dart';
+import 'package:covid19/widgets/chart/linewidget_month.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/chartswidget_day.dart';
-import '../../widgets/chartswidget_month.dart';
-import '../../widgets/chartswidget_week.dart';
+import 'Api_StatisticWidget.dart';
+import 'chart/linewidget_day.dart';
+import 'chart/linewidget_week.dart';
 
 //////////////////////////////////////////////////////////////////////
-
-class Nan extends StatefulWidget {
-  const Nan({Key key}) : super(key: key);
+class PageWidget extends StatefulWidget {
+  const PageWidget({
+    Key key,
+    this.title,
+    this.chart,
+    this.child,
+    this.link1,
+    this.link2,
+    this.number,
+  });
+  final String title;
+  final Widget child;
+  final String chart;
+  final String link1;
+  final String link2;
+  final int number;
 
   @override
-  State<Nan> createState() => _NanState();
+  State<PageWidget> createState() => _PageWidgetState();
 }
 
-class _NanState extends State<Nan> {
+class _PageWidgetState extends State<PageWidget> {
   int Page = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +44,7 @@ class _NanState extends State<Nan> {
         Padding(
           padding: const EdgeInsets.only(left: 28, top: 90),
           child: Text(
-            'จังหวัดน่าน',
+            widget.title,
             style: bold.copyWith(
               color: white,
               fontSize: 36,
@@ -41,7 +55,7 @@ class _NanState extends State<Nan> {
           alignment: Alignment.bottomCenter,
           child: Container(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 0.8,
+            height: MediaQuery.of(context).size.height * 0.79,
             padding: const EdgeInsets.symmetric(horizontal: 24),
             decoration: const BoxDecoration(
               color: bg,
@@ -68,6 +82,11 @@ class _NanState extends State<Nan> {
                     ),
                     const SizedBox(
                       height: 10,
+                    ),
+                    ApiWIdget(
+                      link1: widget.link1,
+                      link2: widget.link2,
+                      number: widget.number,
                     ),
                     Text(
                       'วิเคราะห์ข้อมูล',
@@ -276,7 +295,10 @@ class _NanState extends State<Nan> {
 
   Widget getday() {
     return Wrap(runSpacing: 20, spacing: 20, children: [
-      Charts_day(title: 'nan'),
+      Widget_day(
+        title: widget.chart,
+        title1: 'อำเภอ',
+      ),
       const SizedBox(
         height: 60,
       )
@@ -288,7 +310,10 @@ class _NanState extends State<Nan> {
       runSpacing: 20,
       spacing: 20,
       children: [
-        Charts_week(title: 'nan'),
+        Widget_week(
+          title: widget.chart,
+          title1: 'อำเภอ',
+        ),
         const SizedBox(
           height: 60,
         )
@@ -301,7 +326,10 @@ class _NanState extends State<Nan> {
       runSpacing: 20,
       spacing: 20,
       children: [
-        Charts_month(title: 'nan'),
+        Widget_month(
+          title: widget.chart,
+          title1: 'อำเภอ',
+        ),
         const SizedBox(
           height: 60,
         )

@@ -1,5 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
+import 'package:covid19/address/splashscreen.dart';
+import 'package:covid19/loginscreens/changepassword_page.dart';
+
+import 'package:covid19/loginscreens/login.dart';
 import 'package:covid19/shared/constant.dart';
 import 'package:covid19/widgets/item_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -9,6 +16,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final auth = FirebaseAuth.instance;
     return Stack(
       children: [
         Image.asset(
@@ -52,28 +60,64 @@ class SettingScreen extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const ItemWidget(
-                    color: red,
-                    image: 'mengenal.png',
-                    title: 'การแจ้งเตือน',
-                  ),
-                  const ItemWidget(
-                    color: orange,
+                  ItemWidget(
+                    color: green,
                     image: 'mencegah.png',
-                    title: 'อนุญาติติดตามตำแหน่ง GPS',
+                    title: 'ติดตามตำแหน่ง',
+                    custom: Center(
+                      child: RaisedButton(
+                        color: green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SplashScreen()));
+                        },
+                        child: Text('GPS', style: regular),
+                      ),
+                    ),
                   ),
-                  const ItemWidget(
+                  ItemWidget(
                     color: green,
                     image: 'mengobati.png',
-                    title: 'ตั้งค่าเกี่ยวกับผู้ใช้งาน',
+                    title: 'เปลี่ยนรหัสผ่าน',
+                    custom: Center(
+                      child: FlatButton(
+                        child: Text('เปลี่ยนรหัส', style: regular),
+                        color: green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChangePasswordPage()));
+                        },
+                      ),
+                    ),
                   ),
-                  const ItemWidget(
+                  ItemWidget(
                     color: green,
                     image: 'mengantisipasi.png',
-                    title: 'ตั้งค่าตำแหน่งผู้ใช้งาน',
+                    title: 'ออกจากระบบ',
+                    custom: Center(
+                      child: RaisedButton(
+                        child: Text('ออกจากระบบ', style: regular),
+                        color: green,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        onPressed: () {
+                          auth.signOut().then((value) {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) {
+                              return LoginScreen();
+                            }));
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -2,10 +2,10 @@ import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:covid19/shared/constant.dart';
 import 'package:flutter/material.dart';
 
-class ZZZ extends StatelessWidget {
+class Statistic_Input_Widget extends StatelessWidget {
   final String title;
   final Widget custom;
-  const ZZZ({
+  const Statistic_Input_Widget({
     Key key,
     this.title,
     this.custom,
@@ -58,14 +58,14 @@ class ZZZ extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '+' + document["newcase"] + '(วันนี้)',
+                          '+' + document["newcase"].toString() + '(วันนี้)',
                           style: regular.copyWith(
                             color: orange,
                             fontSize: 15,
                           ),
                         ),
                         Text(
-                          document["totalcase"],
+                          document["totalcase"].toString(),
                           style: regular.copyWith(
                             color: orange,
                             fontSize: 15,
@@ -100,14 +100,14 @@ class ZZZ extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '+' + document["recovery"] + '(วันนี้)',
+                          '+' + document["recovery"].toString() + '(วันนี้)',
                           style: regular.copyWith(
                             color: orange,
                             fontSize: 15,
                           ),
                         ),
                         Text(
-                          document["totalrecovery"],
+                          document["totalrecovery"].toString(),
                           style: regular.copyWith(
                             color: orange,
                             fontSize: 15,
@@ -121,7 +121,7 @@ class ZZZ extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          document["datetime"],
+                          'ข้อมูลวันที่' + document["datetime"],
                           style: regular.copyWith(
                             color: black,
                             fontSize: 12,
@@ -149,14 +149,14 @@ class ZZZ extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '+' + document["newdeath"] + '(วันนี้)',
+                          '+' + document["newdeath"].toString() + '(วันนี้)',
                           style: regular.copyWith(
                             color: red,
                             fontSize: 15,
                           ),
                         ),
                         Text(
-                          document["totaldeath"],
+                          document["totaldeath"].toString(),
                           style: regular.copyWith(
                             color: red,
                             fontSize: 15,

@@ -88,13 +88,15 @@ class _PageWidgetState extends State<PageWidget> {
                       link2: widget.link2,
                       number: widget.number,
                     ),
-                    Text(
-                      'วิเคราะห์ข้อมูล',
+                    new ListTile(
+                    title:  Text(
+                    'วิเคราะห์ข้อมูล',
                       style: medium.copyWith(
-                        color: black,
-                        fontSize: 38,
-                      ),
-                    ),
+                      color: black,
+                        fontSize: 20,
+                              ),),
+                          subtitle: Text('ข้อมูลจำนวนผู้ติดเชื้อ',style: TextStyle(color: red,fontSize: 14),),
+                          ),
                     getTabs(),
                     const SizedBox(
                       height: 24,

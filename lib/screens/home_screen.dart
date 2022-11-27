@@ -65,18 +65,15 @@ class MainHomeScreen extends StatelessWidget {
                     number: 0,
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 20,
                   ),
-                  Text(
-                    'ข้อมูลวิเคราะห์ 3 เดือนล่าสุด',
-                    style: medium.copyWith(
+                   new ListTile(
+                         title: Text(
+                    'ข้อมูลวิเคราะห์ 3 เดือนล่าสุด',style:medium.copyWith(
                       color: black,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
+                      fontSize: 20) ),
+                    subtitle: Text('ข้อมูลจำนวนผู้ติดเชื้อ',style: TextStyle(color: red,fontSize: 14),)),
+                 
                   Widget_day(
                     title: '3month',
                     title1: '3 เดือนล่าสุด',

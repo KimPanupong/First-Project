@@ -1,6 +1,4 @@
 // ignore_for_file: deprecated_member_use
-
-import 'package:covid19/address/splashscreen.dart';
 import 'package:covid19/loginscreens/forgotpassword_page.dart';
 import 'package:covid19/loginscreens/register.dart';
 import 'package:covid19/screens/wrapper_screen.dart';

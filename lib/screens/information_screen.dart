@@ -31,17 +31,20 @@ class _InformationScreenState extends State<InformationScreen> {
       //const NorthStatisticWidget(),
       const SizedBox(
         height: 18,
-      ),
-      Text(
+      ),new ListTile(
+        title:  Text(
         'วิเคราะห์ข้อมูล',
         style: medium.copyWith(
           color: black,
           fontSize: 20,
         ),
       ),
-      const SizedBox(
-        height: 18,
+      subtitle: Text('ข้อมูลจำนวนผู้ติดเชื้อ',style: TextStyle(color: red,fontSize: 14),),
       ),
+     
+      // const SizedBox(
+      //   height: 10,
+      // ),
       getTabs(),
       const SizedBox(
         height: 24,
